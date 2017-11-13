@@ -5,7 +5,7 @@
         <!-- END MOBILE SIDEBAR TOGGLE -->
         <div class="">
           <div class="brand inline   ">
-            <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
+            <img src="{{asset('assets/img/logo.png')}}" alt="logo" data-src="{{asset('assets/img/logo.png')}}" data-src-retina="{{asset('assets/img/logo_2x.png')}}" width="78" height="22">
           </div>
           <!-- START NOTIFICATION LIST -->
                     <ul class="hidden-md-down notification-list no-margin hidden-sm-down b-grey b-l b-r no-style p-l-30 p-r-20">
@@ -94,7 +94,7 @@
                       <div class="notification-item unread clearfix">
                         <div class="heading">
                           <div class="thumbnail-wrapper d24 circular b-white m-r-5 b-a b-white m-t-10 m-r-10">
-                            <img width="30" height="30" data-src-retina="assets/img/profiles/1x.jpg" data-src="assets/img/profiles/1.jpg" alt="" src="assets/img/profiles/1.jpg">
+                            <img width="30" height="30" data-src-retina="{{asset('assets/img/profiles/1x.jpg')}}" data-src="{{asset('assets/img/profiles/1.jpg')}}" alt="" src="{{asset('assets/img/profiles/1.jpg')}}">
                           </div>
                           <a href="#" class="text-complete pull-left">
                             <span class="bold">Revox Design Labs</span>
@@ -138,25 +138,27 @@
         <div class="d-flex align-items-center">
           <!-- START User Info-->
           <div class="pull-left p-r-10 fs-14 font-heading hidden-md-down">
-            <span class="semi-bold">David</span> <span class="text-master">Nest</span>
+            <span class="semi-bold">{{Auth::user()->name}}</span>
           </div>
           <div class="dropdown pull-right hidden-md-down">
             <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="thumbnail-wrapper d32 circular inline">
-              <img src="assets/img/profiles/avatar.jpg" alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg" width="32" height="32">
+              <img src="{{asset('assets/img/profiles/avatar.jpg')}}" alt="" data-src="{{asset('assets/img/profiles/avatar.jpg')}}" data-src-retina="{{asset('assets/img/profiles/avatar_small2x.jpg')}}" width="32" height="32">
               </span>
             </button>
             <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
               <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
               <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
               <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
-              <a href="#" class="clearfix bg-master-lighter dropdown-item">
-                <span class="pull-left">Logout</span>
-                <span class="pull-right"><i class="pg-power"></i></span>
+              <a class="clearfix bg-master-lighter dropdown-item">
+                <form action="{{route('logout')}}" method="POST">
+                  {{csrf_field()}}
+                  <button class="pull-left btn btn-block" style="background: #e7e7e7; border:none">Logout <i class="pg-power"></i></button>
+                </form>
               </a>
             </div>
           </div>
           <!-- END User Info-->
-          <a href="#" class="header-icon pg pg-alt_menu btn-link m-l-10 sm-no-margin d-inline-block" data-toggle="quickview" data-toggle-element="#quickview"></a>
+          
         </div>
       </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Company;
+use Auth;
 
 class CompaniesController extends Controller
 {
@@ -11,9 +13,26 @@ class CompaniesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct(Request $request)
+    {
+        /******
+    
+            si Super admin => acceder à toutes les methodes
+            si admin => pouvoir editer, update,      
+
+        *******/
+
+            dd($request);
+        $this->middleware('owner', ['only'=>'show', 'edit', 'update']);
+        $this->middleware('role:superadmin');
+
+    }
+
     public function index()
     {
-        //
+        $companies = Company::All();
+        return view('companies.index')->withCompanies($companies);
     }
 
     /**
@@ -23,7 +42,7 @@ class CompaniesController extends Controller
      */
     public function create()
     {
-        //
+        return view('companies.create');
     }
 
     /**
@@ -45,27 +64,15 @@ class CompaniesController extends Controller
      */
     public function show($id)
     {
-        //
+        $company = Company::slug($id);
+        return view('companies.show')->withCompany($company);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //

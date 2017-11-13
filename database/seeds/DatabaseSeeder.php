@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        //Créer des utilisateurs + roles + assigner superadmin a ses users
+    	$this->call(UserRoleTableSeeder::class);
+        $this->call(CompaniesSeeder::class);
+
     }
+
+    
 }

@@ -15,14 +15,14 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta content="" name="description" />
     <meta content="" name="author" />
-    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
-    <link class="main-stylesheet" href="pages/css/themes/corporate.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/plugins/pace/pace-theme-flash.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/plugins/font-awesome/css/font-awesome.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('assets/plugins/jquery-scrollbar/jquery.scrollbar.css')}}" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{asset('assets/plugins/switchery/css/switchery.min.css')}}" rel="stylesheet" type="text/css" media="screen" />
+    <link href="{{asset('pages/css/pages-icons.css')}}" rel="stylesheet" type="text/css">
+    <link class="main-stylesheet" href="{{asset('pages/css/themes/corporate.css')}}" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
     window.onload = function()
     {
@@ -79,7 +79,7 @@
         <!-- BEGIN Overlay Header !-->
         <div class="container-fluid">
           <!-- BEGIN Overlay Logo !-->
-          <img class="overlay-brand" src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
+          <img class="overlay-brand" src="{{asset('assets/img/logo.png')}}" alt="logo" data-src="{{asset('assets/img/logo.png')}}" data-src-retina="{{asset('assets/img/logo_2x.png')}}" width="78" height="22">
           <!-- END Overlay Logo !-->
           <!-- BEGIN Overlay Close !-->
           <a href="#" class="close-icon-light overlay-close text-black fs-16">
@@ -119,7 +119,7 @@
                   <!-- BEGIN Search Result Item Thumbnail !-->
                   <div class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10">
                     <div>
-                      <img width="50" height="50" src="assets/img/profiles/avatar.jpg" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" alt="">
+                      <img width="50" height="50" src="{{asset('assets/img/profiles/avatar.jpg')}}" data-src="{{asset('assets/img/profiles/avatar.jpg')}}" data-src-retina="{{asset('assets/img/profiles/avatar2x.jpg')}}" alt="">
                     </div>
                   </div>
                   <!-- END Search Result Item Thumbnail !-->
@@ -210,21 +210,21 @@
     </div>
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
-    <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/tether/js/tether.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
-    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/select2/js/select2.full.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
-    <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery/jquery-1.11.1.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/modernizr.custom.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/tether/js/tether.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery/jquery-easy.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery-unveil/jquery.unveil.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery-ios-list/jquery.ioslist.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery-actual/jquery.actual.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/classie/classie.js')}}"></script>
+    <script src="{{asset('assets/plugins/switchery/js/switchery.min.js')}}" type="text/javascript"></script>
     <!-- END VENDOR JS -->
-    <script src="pages/js/pages.min.js"></script>
+    <script src="{{asset('pages/js/pages.min.js')}}"></script>
   </body>
 </html>

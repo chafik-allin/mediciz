@@ -60,6 +60,9 @@
           @if(session('success'))
           <div class="alert alert-success">{{session('success')}}</div>
           @endif
+          @if(session('warning'))
+          <div class="alert alert-warning">{{session('warning')}}</div>
+          @endif
           @if(count($errors->all())>0)
             <div class="alert alert-danger">
               <ul>  
@@ -91,8 +94,8 @@
             <div class="row">
               <div class="col-md-6 no-padding sm-p-l-10">
                 <div class="checkbox ">
-                  <input type="checkbox" value="1" id="checkbox1">
-                  <label for="checkbox1">Keep Me Signed in</label>
+                  <input type="checkbox"  id="checkbox1" name="remember" {{ old('remember') ? 'checked' : '' }} >
+                  <label for="checkbox1">Se rappeler de moi</label>
                 </div>
               </div>
               <div class="col-md-6 d-flex align-items-center justify-content-end">

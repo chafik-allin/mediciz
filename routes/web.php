@@ -14,15 +14,12 @@ Auth::routes();
 
 
 Route::resource('users', 'UsersController');
+Route::resource('companies', 'CompaniesController');
+
 
 Route::get('/', function () {
-    return view('welcome');
+	return "ici page d'accueil";
 });
 
-Route::get('/admin', function () {
-    return view('admin.index');
-});
+Route::resource('admins', 'AdminsController');
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');

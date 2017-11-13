@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersCoursesTable extends Migration
+class CreateUserAnswerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateUsersCoursesTable extends Migration
      */
     public function up()
     {
-        Schema::create('users_courses', function (Blueprint $table) {
+        Schema::create('user_answer', function (Blueprint $table) {
+            //Chaque cours a ses propres questions
+            //pas de meme answer_id pour multiple cours, sinon => ambiguité 
             $table->integer('user_id');
-            $table->integer('course_id');
-            $table->primary(['user_id', 'course_id'], 'uc');
+            $table->integer('answer_id');
+            $table->primary(['answer_id', 'user_id'], 'usrans');
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateUsersCoursesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_courses');
+        Schema::dropIfExists('user_answer');
     }
 }

@@ -20,6 +20,7 @@ class CreateTrainingsTable extends Migration
             $table->text('description')->nullable();
             $table->enum('difficulty', ['easy', 'medium', 'hard'])->nullable();
             $table->unsignedSmallInteger('hours')->nullable();
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

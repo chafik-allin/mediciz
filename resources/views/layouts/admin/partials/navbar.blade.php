@@ -6,7 +6,7 @@
       <!-- END SIDEBAR MENU TOP TRAY CONTENT-->
       <!-- BEGIN SIDEBAR MENU HEADER-->
       <div class="sidebar-header">
-        <img src="assets/img/logo_white.png" alt="logo" class="brand" data-src="assets/img/logo_white.png" data-src-retina="assets/img/logo_white_2x.png" width="78" height="22">
+        <img src="{{asset('assets/img/logo_white.png')}}" alt="logo" class="brand" data-src="{{asset('assets/img/logo_white.png')}}" data-src-retina="{{asset('assets/img/logo_white_2x.png')}}" width="78" height="22">
         <div class="sidebar-header-controls">
           <button type="button" class="btn btn-xs sidebar-slide-toggle btn-link m-l-20" data-pages-toggle="#appMenu"><i class="fa fa-angle-down fs-16"></i>
           </button>
@@ -20,12 +20,21 @@
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">
           <li class="m-t-30">
-            <a href="#" class="detailed">
+            <a href="#" class="detailed ">
               <span class="title">Accueil</span>
               <span class="details">234 notifications</span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-home"></i></span>
           </li>
+
+          <li class="">
+            <a href="{{route('companies.index')}}" class="detailed">
+              <span class="title">Entreprises</span>
+              <span class="details">12 entreprises</span>
+            </a>
+            <span class="icon-thumbnail "><i class="fa fa-building"></i></span>
+          </li>
+
           <li class="">
             <a href="#" class="detailed">
               <span class="title">Formations</span>
@@ -46,13 +55,6 @@
               <span class="details">12 utilisateurs</span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
-          </li>
-          <li class="">
-            <a href="#" class="detailed">
-              <span class="title">Entreprises</span>
-              <span class="details">12 entreprises</span>
-            </a>
-            <span class="icon-thumbnail "><i class="fa fa-building"></i></span>
           </li>
           <li class="">
             <a href="#" class="detailed">
