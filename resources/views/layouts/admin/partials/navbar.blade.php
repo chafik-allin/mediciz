@@ -40,7 +40,7 @@
           </li>
           @endif
           <li class="">
-            <a href="#" class="detailed">
+            <a href="{{route('trainings.index')}}" class="detailed">
               <span class="title">Formations</span>
               <span class="details">12 formations</span>
             </a>

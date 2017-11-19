@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Training;
 
 class TrainingsController extends Controller
 {
@@ -13,7 +14,8 @@ class TrainingsController extends Controller
      */
     public function index()
     {
-        //
+        $trainings = Training::paginate(10);
+        return view('trainings.index')->withTrainings($trainings);
     }
 
     /**
@@ -23,7 +25,7 @@ class TrainingsController extends Controller
      */
     public function create()
     {
-        //
+        return view('trainings.create');
     }
 
     /**
@@ -34,7 +36,7 @@ class TrainingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

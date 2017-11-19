@@ -14,7 +14,7 @@ Auth::routes();
 
 Route::redirect('/', '/login');
 
+Route::resource('admins', 'AdminsController');
 Route::resource('users', 'UsersController');
 Route::resource('companies', 'CompaniesController');
-
-Route::resource('admins', 'AdminsController');
+Route::resource('trainings', 'TrainingsController');
