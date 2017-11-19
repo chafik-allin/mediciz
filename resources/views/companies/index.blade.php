@@ -44,7 +44,7 @@
               @foreach($companies as $company)
               <tr>
                 <td class="v-align-middle semi-bold sorting_1 ">
-                  <h6><a href="{{route('companies.show',$company)}}" class="btn btn-info" target="_blank">{{$company->name}}</a></h6>
+                  <h6><a href="{{route('companies.show',$company)}}" class="btn btn-info" >{{$company->name}}</a></h6>
                 </td> 
                 <td class="v-align-middle">
                   <p>{{str_limit($company->description,50)}}</p>

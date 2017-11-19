@@ -20,21 +20,25 @@
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">
           <li class="m-t-30">
-            <a href="#" class="detailed ">
+            <a href="{{route('admins.index')}}" class="detailed ">
               <span class="title">Accueil</span>
               <span class="details">234 notifications</span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-home"></i></span>
           </li>
-
+          @if(Auth::user()->is('superadmin') or Auth::user()->is('admin'))
           <li class="">
+            @if(Auth::user()->is('superadmin'))
             <a href="{{route('companies.index')}}" class="detailed">
+            @elseif(Auth::user()->is('admin'))
+            <a href="{{route('companies.show', Auth::user()->company)}}" class="detailed">
+            @endif
               <span class="title">Entreprises</span>
               <span class="details">12 entreprises</span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-building"></i></span>
           </li>
-
+          @endif
           <li class="">
             <a href="#" class="detailed">
               <span class="title">Formations</span>

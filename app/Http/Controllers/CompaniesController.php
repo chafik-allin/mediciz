@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use Auth;
-
+use Route;
 class CompaniesController extends Controller
 {
     /**
@@ -16,22 +16,18 @@ class CompaniesController extends Controller
 
     public function __construct(Request $request)
     {
-        /******
-    
-            si Super admin => acceder à toutes les methodes
-            si admin => pouvoir editer, update,      
-
-        *******/
-
-            dd($request);
-        $this->middleware('owner', ['only'=>'show', 'edit', 'update']);
-        $this->middleware('role:superadmin');
+        $this->middleware('owner:'.Route::current()->company, ['only'=>'show', 'edit', 'update']);
+        $this->middleware('role:superadmin', ['only'=>'index', 'create', 'store', 'destroy']);
 
     }
 
-    public function index()
+    public function index(Request $request)
     {
         $companies = Company::All();
+
+        if($request->ajax())
+            return response()->json($companies->all());  
+    
         return view('companies.index')->withCompanies($companies);
     }
 
@@ -51,31 +47,37 @@ class CompaniesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(\App\Http\Requests\CompanyRequest $request)
     {
-        //
+        $request['slug'] = str_slug($request->name);
+        Company::firstOrCreate(array_except($request->all(), '_token'));
+        return redirect()->back()->withSuccess("L'entreprise a été ajouté avec succes");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+  
+    public function show(Request $request, $id)
     {
         $company = Company::slug($id);
+        if($request->ajax())
+            return response()->json($company);
         return view('companies.show')->withCompany($company);
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-
+        $company  = Company::slug($id);
+        if($request->ajax())
+            return response()->json($company);
+        return view('companies.edit')->withCompany($company);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $company = Company::slug($id);
+        $company->update($request->all());
+        if($request->ajax())
+            return response()->json(['response'=>'success', 'message'=>"L'entreprise a été modifié avec success"]);
+        return redirect()->back()->withSuccess("L'entreprise a été modifié avec success");
     }
 
     /**

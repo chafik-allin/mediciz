@@ -12,14 +12,9 @@
 */
 Auth::routes();
 
+Route::redirect('/', '/login');
 
 Route::resource('users', 'UsersController');
 Route::resource('companies', 'CompaniesController');
 
-
-Route::get('/', function () {
-	return "ici page d'accueil";
-});
-
 Route::resource('admins', 'AdminsController');
-

@@ -4,7 +4,7 @@
   <style>
     #company-cover
     {
-      background: url(https://picsum.photos/1024/480/?random);
+      background: url({{asset($company->image)}});
       background-size:cover;
       background-position: center center;
     }
@@ -38,15 +38,19 @@
                     <div class="row-xs-height">
                       <div class="social-user-profile col-xs-height text-center col-top">
                         <div class="thumbnail-wrapper d48 circular bordered b-white">
-                          <img alt="Avatar" width="55" height="55" data-src-retina="{{asset('assets/img/profiles/avatar_small2x.jpg')}}" data-src="{{asset('assets/img/profiles/avatar.jpg')}}" src="{{asset('assets/img/profiles/avatar.jpg')}}">
+                          @if($company->admin)
+
+                          @else
+                          <img alt="Avatar" width="55" height="55" data-src-retina="https://pbs.twimg.com/profile_images/757974066011770880/ae2Eop2g.jpg" data-src="https://pbs.twimg.com/profile_images/757974066011770880/ae2Eop2g.jpg" src="https://pbs.twimg.com/profile_images/757974066011770880/ae2Eop2g.jpg">
+                          @endif
                         </div>
                         <br>
                         <i class="fa fa-check-circle text-success fs-16 m-t-10"></i>
                       </div>
                       <div class="col-xs-height p-l-20">
-                        <h3 class="no-margin">Khlifati Leila</h3>  
-                        <p class="no-margin fs-16">khlifati@assurance.com</p>
-                        <p class="hint-text m-t-5 small">021379379</p>
+                        <h3 class="no-margin">@if($company->admin) {{$company->admin->name}} @else <div class="label label-danger">Indéfinie</div> @endif</h3>  
+                        <p class="no-margin fs-16">{{$company->contact}}</p>
+                        <p class="hint-text m-t-5 small">{{$company->phone}}</p>
                       </div>
                     </div>
                   </div>

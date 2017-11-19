@@ -1,11 +1,11 @@
-@extends('layouts.admin.master',['title'=>"Créer une entreprise"])
+@extends('layouts.admin.master',['title'=>"Modifier l'entreprise $company->name"])
 
 
 @section('content')
 <div class="card card-default mt-5">
   <div class="card-header ">
     <div class="card-title">
-      Ajouter une entreprise
+      Modifier l'entreprise {{$company->name}}
     </div>
   </div>
   <div class="card-block">
@@ -22,16 +22,17 @@
     @if(session('success'))
       <div class="alert alert-success">{{session('success')}}</div>
     @endif
-    <form role="form" action="{{route('companies.store')}}" method="POST">
+    <form role="form" action="{{route('companies.update',$company)}}" method="POST">
+  {{csrf_field()}}
+  {{method_field('put')}}
       <i>* Champs obligatoire</i>
       <div class="form-group">
         <label>Nom de l'entreprise</label>
-        <input type="text" name="name" class="form-control" value="{{old('name')}}" required >
+        <input type="text" name="name" class="form-control" value="{{$company->name}}" required >
       </div>
-  {{csrf_field()}}
       <div class="form-group">
         <label for="description">Description *</label>
-        <textarea name="description" id="description" cols="30" rows="10" class="form-control" required>{{old('description')}}</textarea>
+        <textarea name="description" id="description" cols="30" rows="10" class="form-control" required>{{$company->description}}</textarea>
       </div>
 
       <div class="form-group">
@@ -42,34 +43,34 @@
               <i class="fa fa-picture-o"></i> Choisir
             </a>
           </span>
-          <input id="thumbnail" class="form-control" type="text" name="image" value="{{old('image')}}" required >
+          <input id="thumbnail" class="form-control" type="text" name="image" value="{{asset($company->image)}}" required >
         </div>
-        <img id="holder" style="margin-top:15px;max-height:100px;" src="{{old('image')}}" >
+        <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($company->image)}}" >
       </div>
 
       <div class="form-group">
         <label>CEO *</label>
         <span class="help">(Chef d'entreprise)</span>
-        <input type="text" class="form-control" required name="founder" value="{{old('founder')}}" >
+        <input type="text" class="form-control" required name="founder" value="{{$company->founder}}" >
       </div>
 
       <div class="form-group">
         <label>Telephone *</label>
-        <input type="text" class="form-control" placeholder="Numéro de telephone" required name="phone" value="{{old('phone')}}" >
+        <input type="text" class="form-control" placeholder="Numéro de telephone" required name="phone" value="{{$company->phone}}" >
       </div>
 
       <div class="form-group">
         <label>contact *</label>
         <span class="help">e.g. "contact@example.com"</span>
-        <input type="email" class="form-control" placeholder="ex: some@example.com" required="" name="contact" value="{{old('contact')}}" >
+        <input type="email" class="form-control" placeholder="ex: some@example.com" required="" name="contact" value="{{$company->contact}}" >
       </div>
       
       <div class="form-group">
         <label>Adresse</label>
-        <textarea name="adress" id="" cols="30" rows="10" class="form-control">{{old('adress')}}</textarea>
+        <textarea name="adress" id="" cols="30" rows="10" class="form-control">{{$company->adress}}</textarea>
       </div>
       <div class="form-group">
-        <button class="btn btn-block btn-success"><i class="fa fa-save fa-lg"></i> Ajouter</button>
+        <button class="btn btn-block btn-success"><i class="fa fa-save fa-lg"></i> Modifier</button>
       </div>
     </form>
   </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswersTable extends Migration
+class CreateUserCertificateTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->text('suggestion');
-            $table->integer('qcm_id');
-            $table->boolean('is_correct')->default(false);
+        Schema::create('user_certificate', function (Blueprint $table) {
+            $table->integer('user_id');
+            $table->integer('certificate_id');
+            $table->primary(['certificate_id', 'user_id'], 'cerusr');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('user_certificate');
     }
 }

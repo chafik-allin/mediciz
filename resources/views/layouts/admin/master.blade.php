@@ -25,7 +25,6 @@
     <link href="{{asset('pages/css/pages-icons.css')}}" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="{{asset('pages/css/themes/corporate.css')}}" rel="stylesheet" type="text/css" />
 
-
   <link href="{{asset('assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/plugins/datatables-responsive/css/datatables.responsive.css')}}" rel="stylesheet" type="text/css" media="screen" />
@@ -248,7 +247,7 @@
 
     <script src="{{asset('assets/js/tables.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/datatables.js')}}" type="text/javascript"></script>
-
+     <script src="{{asset('/vendor/laravel-filemanager/js/lfm.js')}}"></script>
     @yield('scripts')
   </body>
 </html>

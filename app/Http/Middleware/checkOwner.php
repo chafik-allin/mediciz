@@ -13,16 +13,15 @@ class checkOwner
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $company=null)
+    public function handle($request, Closure $next, $company)
     {
         if(! Auth::check() )
             return redirect()
                     ->route('login')
                     ->withErrors("Vous devez être connecter pour pouvoir acceder à cette page");
 
-        dd($request);
-//        if($company == null)           
         if(!$request->user()->owner($company))
             return "tu n'est pas le owner hbibi!";
+        return $next($request);
     }
 }
