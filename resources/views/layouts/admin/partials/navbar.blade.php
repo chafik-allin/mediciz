@@ -34,7 +34,7 @@
             <a href="{{route('companies.show', Auth::user()->company)}}" class="detailed">
             @endif
               <span class="title">Entreprises</span>
-              <span class="details">12 entreprises</span>
+              <span class="details">{{App\Models\Company::count()}} entreprises</span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-building"></i></span>
           </li>
@@ -42,31 +42,41 @@
           <li class="">
             <a href="{{route('trainings.index')}}" class="detailed">
               <span class="title">Formations</span>
-              <span class="details">12 formations</span>
+              <span class="details">
+                @if(Auth::user()->isStudent())
+                  {{Auth::user()->trainings()->count()}}
+                @else
+                  {{App\Models\Training::count()}} 
+                @endif
+                formations
+              </span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-graduation-cap"></i></span>
           </li>
+          @if(Auth::user()->isSuperAdmin())
           <li class="">
-            <a href="#" class="detailed">
+            <a href="{{route('courses.index')}}" class="detailed">
               <span class="title">cours</span>
-              <span class="details">12 cours</span>
+              <span class="details">
+                @if(Auth::user()->isStudent())
+                  {{Auth::user()->courses()->count()}}
+                @else
+                  {{\App\Models\Course::count()}} 
+                @endif
+                Cours
+              </span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-newspaper-o"></i></span>
           </li>
+
           <li class="">
-            <a href="#" class="detailed">
+            <a href="{{route('users.index')}}" class="detailed">
               <span class="title">Utilisateurs</span>
-              <span class="details">12 utilisateurs</span>
+              <span class="details">{{\App\User::count()}} utilisateurs</span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
           </li>
-          <li class="">
-            <a href="#" class="detailed">
-              <span class="title">Super Admin</span>
-              <span class="details">2 Super admins</span>
-            </a>
-            <span class="icon-thumbnail "><i class="fa fa-user"></i></span>
-          </li>
+          @endif
           <li class="">
             <a href="javascript:;">
               <span class="title">Page 3</span>

@@ -101,120 +101,139 @@
               <div class="tab-pane active" id="tab-fillup1" aria-expanded="true">
             
                 <div class="card-block">
+                    <div class="col-12"  >
+                      <a href="{{route('trainings.index')}}" class="btn btn-primary">Voir toutes les formations</a>
+                  </div>
+                  <hr style="width: 50px;">
                   <div class="row">
-                  <div class="col-lg-4  mix Programmation">
-                    <div class="card card-default ">
-                      <div class="card-header  separator">
-                        <div class="card-controls" data-target="#modalSlideLeft" data-toggle="modal">
-                          <ul>
-                            <li>
-                              <a data-toggle="close" class="card-close" href="#">
-                                <i class="card-icon card-icon-close"></i>
-                              </a>
-                            </li>
-                          </ul>
+
+                    @forelse($company->trainings as $training)
+                      <div class="col-md-4"> 
+                        @component('components.training', ['training'=>$training]) @endcomponent
+                      </div>
+  
+                    @empty
+                    <div class="col-md-12">
+                      <div class="alert alert-warning text-center">
+                        Aucune formation n'est associé à cette entreprise
+                      </div>
+                    </div>
+                    @endif
+                  {{--
+                    <div class="col-lg-4  mix Programmation">
+                      <div class="card card-default ">
+                        <div class="card-header  separator">
+                          <div class="card-controls" data-target="#modalSlideLeft" data-toggle="modal">
+                            <ul>
+                              <li>
+                                <a data-toggle="close" class="card-close" href="#">
+                                  <i class="card-icon card-icon-close"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="card-title bold text-primary"> 10
+                            <i class="fa fa-user"></i>
+                          </div>
+                          <div class="card-title bold">.</div>
+                          <div class="card-title bold text-success"> 04
+                            <i class="fa fa-check"></i> 
+                          </div>
+                          <div class="card-title bold "> .</div>
+                          <div class="card-title bold text-danger"> 04
+                            <i class="fa fa-close"></i> 
+                          </div>
                         </div>
-                        <div class="card-title bold text-primary"> 10
-                          <i class="fa fa-user"></i>
-                        </div>
-                        <div class="card-title bold">.</div>
-                        <div class="card-title bold text-success"> 04
-                          <i class="fa fa-check"></i> 
-                        </div>
-                        <div class="card-title bold "> .</div>
-                        <div class="card-title bold text-danger"> 04
-                          <i class="fa fa-close"></i> 
+                        <a href="/admin_formation">
+                          <div class="cover-photo">
+                            <img class="image-responsive-height " src="{{asset('assets/img/formation/1.jpeg')}}" alt="">
+                          </div>
+                        </a>
+                        <div class="card-block">
+                          <h3><span class="semi-bold">Visite</span> de risque</h3>
+                          <h5 class="semi-bold">Mahdi Nabil, Ali Benabbes</h5>
+                          <div class="card-title bold text-primary">
+                            <i class="fa  fa-clock-o"></i> 48 Hours
+                          </div>
+                          <p>
+                            La visite de risques est introduite dans l’établissement comme méthode de repérage et d’évaluation de risques latents, découvrez cette formation indispensable dans le cours suivant.
+                          </p>
+                          <br>
+                          <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">ECommerce</button>
+                          <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Marketing</button>
                         </div>
                       </div>
-                      <a href="/admin_formation">
+                    </div>
+                    <div class="col-lg-4 mix Programmation">
+                      <div class="card card-default ">
+                        <div class="card-header  separator">
+                          <div class="card-title bold text-primary"> 10
+                            <i class="fa fa-user"></i>
+                          </div>
+                          <div class="card-title bold"> .</div>
+                          <div class="card-title bold text-success"> 04
+                            <i class="fa fa-check"></i> 
+                          </div>
+                          <div class="card-title bold "> .</div>
+                          <div class="card-title bold text-danger"> 04
+                            <i class="fa fa-close"></i> 
+                          </div>
+                        </div>
                         <div class="cover-photo">
-                          <img class="image-responsive-height " src="{{asset('assets/img/formation/1.jpeg')}}" alt="">
+                          <img class="image-responsive-height " src="{{asset('assets/img/formation/2.jpg')}}" alt="">
                         </div>
-                      </a>
-                      <div class="card-block">
-                        <h3><span class="semi-bold">Visite</span> de risque</h3>
-                        <h5 class="semi-bold">Mahdi Nabil, Ali Benabbes</h5>
-                        <div class="card-title bold text-primary">
-                          <i class="fa  fa-clock-o"></i> 48 Hours
+                        <div class="card-block">
+                          <h3><span class="semi-bold">Swift 04</span> Developers secret</h3>
+                          <h5 class="semi-bold">Ali Benabbes</h5>
+                          <div class="card-title bold text-primary">
+                            <i class="fa  fa-clock-o"></i> 48 Hours
+                          </div>
+                          <p>
+                            La visite de risques est introduite dans l’établissement comme méthode de repérage et d’évaluation de risques latents, découvrez cette formation indispensable dans le cours suivant.
+                          </p>
+                          <br>
+                          <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">
+                            Programation
+                          </button>
+                          <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Design</button>
+                          <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">UI/UX</button>
                         </div>
-                        <p>
-                          La visite de risques est introduite dans l’établissement comme méthode de repérage et d’évaluation de risques latents, découvrez cette formation indispensable dans le cours suivant.
-                        </p>
-                        <br>
-                        <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">ECommerce</button>
-                        <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Marketing</button>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-lg-4 mix Programmation">
-                    <div class="card card-default ">
-                      <div class="card-header  separator">
-                        <div class="card-title bold text-primary"> 10
-                          <i class="fa fa-user"></i>
+                    <div class="col-lg-4 mix Marketing">
+                      <div class="card card-default ">
+                        <div class="card-header  separator">
+                          <div class="card-title bold text-primary"> 10
+                            <i class="fa fa-user"></i>
+                          </div>
+                          <div class="card-title bold"> .</div>
+                          <div class="card-title bold text-success"> 04
+                            <i class="fa fa-check"></i> 
+                          </div>
+                          <div class="card-title bold "> .</div>
+                          <div class="card-title bold text-danger"> 04
+                            <i class="fa fa-close"></i> 
+                          </div>
                         </div>
-                        <div class="card-title bold"> .</div>
-                        <div class="card-title bold text-success"> 04
-                          <i class="fa fa-check"></i> 
+                        <div class="cover-photo">
+                          <img class="image-responsive-height " src="{{asset('assets/img/formation/3.jpeg')}}" alt="">
                         </div>
-                        <div class="card-title bold "> .</div>
-                        <div class="card-title bold text-danger"> 04
-                          <i class="fa fa-close"></i> 
+                        <div class="card-block">
+                          <h3><span class="semi-bold">Android</span> From zero to hero</h3>
+                          <h5 class="semi-bold">Mahdi Nabil</h5>
+                          <div class="card-title bold text-primary">
+                            <i class="fa  fa-clock-o"></i> 50 Hours
+                          </div>
+                          <p>
+                            La visite de risques est introduite dans l’établissement comme méthode de repérage et d’évaluation de risques latents, découvrez cette formation indispensable dans le cours suivant.
+                          </p>
+                          <br>
+                          <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Commerce</button>
+                          <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Marketing</button>
                         </div>
-                      </div>
-                      <div class="cover-photo">
-                        <img class="image-responsive-height " src="{{asset('assets/img/formation/2.jpg')}}" alt="">
-                      </div>
-                      <div class="card-block">
-                        <h3><span class="semi-bold">Swift 04</span> Developers secret</h3>
-                        <h5 class="semi-bold">Ali Benabbes</h5>
-                        <div class="card-title bold text-primary">
-                          <i class="fa  fa-clock-o"></i> 48 Hours
-                        </div>
-                        <p>
-                          La visite de risques est introduite dans l’établissement comme méthode de repérage et d’évaluation de risques latents, découvrez cette formation indispensable dans le cours suivant.
-                        </p>
-                        <br>
-                        <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">
-                          Programation
-                        </button>
-                        <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Design</button>
-                        <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">UI/UX</button>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-lg-4 mix Marketing">
-                    <div class="card card-default ">
-                      <div class="card-header  separator">
-                        <div class="card-title bold text-primary"> 10
-                          <i class="fa fa-user"></i>
-                        </div>
-                        <div class="card-title bold"> .</div>
-                        <div class="card-title bold text-success"> 04
-                          <i class="fa fa-check"></i> 
-                        </div>
-                        <div class="card-title bold "> .</div>
-                        <div class="card-title bold text-danger"> 04
-                          <i class="fa fa-close"></i> 
-                        </div>
-                      </div>
-                      <div class="cover-photo">
-                        <img class="image-responsive-height " src="{{asset('assets/img/formation/3.jpeg')}}" alt="">
-                      </div>
-                      <div class="card-block">
-                        <h3><span class="semi-bold">Android</span> From zero to hero</h3>
-                        <h5 class="semi-bold">Mahdi Nabil</h5>
-                        <div class="card-title bold text-primary">
-                          <i class="fa  fa-clock-o"></i> 50 Hours
-                        </div>
-                        <p>
-                          La visite de risques est introduite dans l’établissement comme méthode de repérage et d’évaluation de risques latents, découvrez cette formation indispensable dans le cours suivant.
-                        </p>
-                        <br>
-                        <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Commerce</button>
-                        <button class="btn btn-tag   btn-tag-light btn-tag-rounded m-r-5 m-b-10">Marketing</button>
-                      </div>
-                    </div>
-                  </div>
+                  --}}
                   </div>
                 </div>
                 <div class="modal fade slide-right" id="modalSlideLeft" tabindex="-1" role="dialog" aria-hidden="true">

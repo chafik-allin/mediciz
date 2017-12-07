@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+	use \App\Models\FindBySlug;
+   	
+   	protected $fillable = ['slug', 'title', 'description', 'video', 'hours', 'user_id'];
 
 	public function Qcms()
 	{
-		$this->hasMany('App\Models\Qcm');
+		return $this->hasMany('App\Models\Qcm');
 	}
 
 	public function Training()
 	{
-		$this->belongsToMany('App\Models\Training', 'training_course');
+		return $this->belongsTo('App\Models\Training');
 	}
 }

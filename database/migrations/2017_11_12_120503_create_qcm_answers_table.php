@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAnswersTable extends Migration
+class CreateQcmAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAnswersTable extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('qcm_answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('suggestion');
+            $table->text('content');
             $table->integer('qcm_id');
-            $table->boolean('is_correct')->default(false);
+            $table->boolean('is_correct');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('qcm_answers');
     }
 }

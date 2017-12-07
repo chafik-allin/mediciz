@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTrainingCourseTable extends Migration
+class AddIsConfirmedToTrainingCompanyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateTrainingCourseTable extends Migration
      */
     public function up()
     {
-        Schema::create('training_course', function (Blueprint $table) {
-            $table->integer('training_id');
-            $table->integer('course_id');
-            $table->primary(['course_id', 'training_id'], 'trcrs');
-            $table->timestamps();
+        Schema::table('training_company', function (Blueprint $table) {
+            $table->boolean('is_confirmed')->default(false);
         });
     }
 
@@ -28,6 +25,8 @@ class CreateTrainingCourseTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('training_course');
+        Schema::table('training_company', function (Blueprint $table) {
+            $table->dropColumn('is_confirmed');
+        });
     }
 }

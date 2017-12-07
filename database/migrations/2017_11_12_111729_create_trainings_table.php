@@ -18,8 +18,9 @@ class CreateTrainingsTable extends Migration
             $table->string("slug")->unique();
             $table->string('title');
             $table->text('description')->nullable();
+            $table->string('cover');
             $table->enum('difficulty', ['easy', 'medium', 'hard'])->nullable();
-            $table->unsignedSmallInteger('hours')->nullable();
+            $table->unsignedSmallInteger('hours')->default(0);
             $table->integer('user_id');
             $table->timestamps();
         });

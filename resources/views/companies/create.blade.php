@@ -28,7 +28,7 @@
         <label>Nom de l'entreprise</label>
         <input type="text" name="name" class="form-control" value="{{old('name')}}" required >
       </div>
-  {{csrf_field()}}
+      {{csrf_field()}}
       <div class="form-group">
         <label for="description">Description *</label>
         <textarea name="description" id="description" cols="30" rows="10" class="form-control" required>{{old('description')}}</textarea>

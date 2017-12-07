@@ -17,8 +17,10 @@ class CreateUserAnswerTable extends Migration
             //Chaque cours a ses propres questions
             //pas de meme answer_id pour multiple cours, sinon => ambiguité 
             $table->integer('user_id');
+            $table->integer('course_id');
+            $table->integer('qcm_id');
             $table->integer('answer_id');
-            $table->primary(['answer_id', 'user_id'], 'usrans');
+            $table->primary(['answer_id', 'user_id','course_id', 'qcm_id'], 'aucq');
             $table->timestamps();
         });
     }

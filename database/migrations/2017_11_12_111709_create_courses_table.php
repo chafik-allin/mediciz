@@ -19,7 +19,9 @@ class CreateCoursesTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('video');
+            $table->integer('hours');
             $table->integer('user_id');
+            $table->integer('training_id');
             $table->timestamps();
         });
     }

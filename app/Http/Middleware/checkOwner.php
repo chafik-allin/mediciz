@@ -20,6 +20,10 @@ class checkOwner
                     ->route('login')
                     ->withErrors("Vous devez être connecter pour pouvoir acceder à cette page");
 
+        //si SuperAdmin => laisser passer
+        if($request->user()->isSuperAdmin())
+            return $next($request);
+
         if(!$request->user()->owner($company))
             return "tu n'est pas le owner hbibi!";
         return $next($request);

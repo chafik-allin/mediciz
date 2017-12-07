@@ -1,0 +1,6 @@
+Je suis entrain de créer :
+	-	Attacher une formation à une entreprise:
+			Scénario:
+				l'admin (chef entreprise) entre dans la liste des formations, 
+				voir toutes les formations, en bas de chaque formation un bouton (Demander)
+				Ou bien entrer dans la formation & voir les détails & se renseigner => quelque part un bouton demander ou s'abonner ou peu importe

@@ -9,6 +9,7 @@
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "merujan99/laravel-video-embed": "dev-master",
         "unisharp/laravel-filemanager": "~1.8"
     },
     "require-dev": {
@@ -18,6 +19,9 @@
         "phpunit/phpunit": "~6.0"
     },
     "autoload": {
+        "files":[
+            "app/helpers.php"
+        ],
         "classmap": [
             "database/seeds",
             "database/factories"

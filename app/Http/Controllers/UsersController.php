@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegister;
@@ -10,83 +8,48 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
+    public function __construct()
+    {
+        $this->middleware('role:superadmin');
+    }
 
     public function index()
     {
-        //
+        $users = User::All();
+        return view('users.index')->withUsers($users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(UserRegister $request)
+    {       
+
+    }
+  
+    public function show($id)
     {
-        
-        User::Create(['name'=>$request->name, 'email'=>$request->email, 'password'=>bcrypt($request->password)]);
-        return redirect()->route('login')->withSuccess('Vous êtes bien enregistré. Veuillez vous connecter');
+        $user = User::slug($id);
+        return (response()->json($user->toArray()));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\ModelsUser  $modelsUser
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ModelsUser $modelsUser)
+    public function edit($id)
+    {
+        $user = User::slug($id);
+        dd("Editer ".$user->name);
+    }
+
+    public function update(Request $request,  $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ModelsUser  $modelsUser
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ModelsUser $modelsUser)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ModelsUser  $modelsUser
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ModelsUser $modelsUser)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ModelsUser  $modelsUser
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ModelsUser $modelsUser)
-    {
-        //
+        $user = User::slug($id);
+        $user->delete();
+        return redirect()->back()->withSuccess('Utilisateur supprimé avec success');
     }
 }

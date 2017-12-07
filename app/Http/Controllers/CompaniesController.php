@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Models\Training;
+use App\User;
+
 use Auth;
 use Route;
 class CompaniesController extends Controller
@@ -17,7 +20,7 @@ class CompaniesController extends Controller
     public function __construct(Request $request)
     {
         $this->middleware('owner:'.Route::current()->company, ['only'=>'show', 'edit', 'update']);
-        $this->middleware('role:superadmin', ['only'=>'index', 'create', 'store', 'destroy']);
+        $this->middleware('role:superadmin', ['only'=>['index', 'create', 'store', 'destroy']]);
 
     }
 
@@ -26,8 +29,8 @@ class CompaniesController extends Controller
         $companies = Company::All();
 
         if($request->ajax())
-            return response()->json($companies->all());  
-    
+            return response()->json($companies->all()); 
+        
         return view('companies.index')->withCompanies($companies);
     }
 
@@ -88,6 +91,31 @@ class CompaniesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $company = Company::slug($id);
+        $company->delete();
+        return redirect()->back()->withSuccess('Formation supprimée avec succes');
+    }
+
+    public function subscribe(Request $request)
+    {
+        
+  /*
+        $admins = \App\Models\Role::where('name', 'superadmin');
+        return $admins;
+*/
+        $this->validate($request,
+        [
+            'training'=>'required|exists:trainings,slug'
+        ]);
+        $training = Training::slug($request->training);
+        $company = Auth::user()->Company;
+
+        $training_company = $training->companies()->where('id',$company->id)->first();
+        if($training_company == null){
+            $training->Companies()->attach($company->id);
+        }
+
+        
+        return redirect()->back();
     }
 }

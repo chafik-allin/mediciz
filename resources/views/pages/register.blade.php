@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Lock Screen</title>
+    <title>Mediciz | Créer un utilisateur</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -38,9 +38,11 @@
       <div class="d-flex justify-content-center flex-column full-height ">
       
         <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-        <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+        
+
+        <h3>Bonjour {{request()->user()->name}}</h3>
         <p>
-          Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
+          Dans cette page vous allez créer des nouveaux utilisateurs 
         </p>
           @if(count($errors->all())>0)
         <div class="alert alert-danger">
@@ -51,19 +53,22 @@
           </ul>
         </div>
         @endif
+        @if(session('success'))
+        <div class="alert alert-success">{!! session('success') !!}</div>
+        @endif
         <form id="form-register" class="p-t-15" role="form" action="{{route('register')}}" method="POST">
           {{ csrf_field() }}
           <div class="row">
             <div class="col-md-6">
               <div class="form-group form-group-default">
                 <label>Nom</label>
-                <input type="text" name="name" placeholder="nom complet" class="form-control" required>
+                <input type="text" name="name" placeholder="nom complet" class="form-control" required value="{{old('name')}}">
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group form-group-default">
                 <label>Email</label>
-                <input type="email" name="email" placeholder="mail@example.com" class="form-control" required>
+                <input type="email" name="email" placeholder="mail@example.com" class="form-control" required value={{old('email')}}>
               </div>
             </div>
           </div>
@@ -71,7 +76,7 @@
             <div class="col-md-12">
               <div class="form-group form-group-default">
                 <label>Mot de passe</label>
-                <input type="password" name="password" placeholder="Mot de passe" class="form-control" required>
+                <input type="password" name="password" placeholder="Mot de passe" class="form-control" required >
               </div>
             </div>
           </div>

@@ -18,20 +18,17 @@ class Company extends Model
 
     public function Trainings()
     {
-        $this->belongsToMany('App\Models\Training', 'training_company');
+        return $this->belongsToMany('App\Models\Training', 'training_company');
     }
 
+    public function UsersWithCertificate(\App\Models\Training $training)
+    {
+        
+    }
     public function Users()
     {
-        $this->hasMany('App\User');
+        return $this->hasMany('App\User');
     }
 
-  	public function setSlugAttribute($value)
-    {
-        $companies = Company::where('slug','like',$value.'%')->get();
-        if($companies->count()>0)
-            $this->attributes['slug'] =  $value."-".$companies->count();
-        else
-            $this->attributes['slug'] = $value;
-    }
+  
 }

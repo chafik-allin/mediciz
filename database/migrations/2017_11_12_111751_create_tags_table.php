@@ -14,12 +14,11 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('taggable_id');
             $table->string('taggable_type');
             $table->string('name');
             $table->timestamps();
-
-            $table->primary(['taggable_id', 'taggable_type']);
         });
     }
 

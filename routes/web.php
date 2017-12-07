@@ -18,3 +18,11 @@ Route::resource('admins', 'AdminsController');
 Route::resource('users', 'UsersController');
 Route::resource('companies', 'CompaniesController');
 Route::resource('trainings', 'TrainingsController');
+Route::get('trainings/{id}/courses',['uses'=>'TrainingsController@courses', 'as'=>'trainings.courses']);
+Route::resource('courses', 'CoursesController');
+Route::get('courses/{course}/qcms', ['uses'=>'CoursesController@qcms', 'as'=>'courses.qcms']);
+Route::resource('categories', 'CategoriesController');
+Route::resource('qcms', 'QcmsController');
+
+
+Route::post('companies/subscribe', ['uses'=>"CompaniesController@subscribe", "as"=>"companies.subscribe"]);

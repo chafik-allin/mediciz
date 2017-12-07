@@ -15,7 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email','slug', 'password'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -38,6 +38,19 @@ class User extends Authenticatable
         
         return false;
     }
+    public function isAdmin(){
+        return $this->is('admin');
+    }
+    public function isSuperAdmin(){
+        return $this->is('superadmin');
+    }
+
+    public function isStudent()
+    {
+        if($this->is('admin') || $this->is('superadmin'))
+            return false;
+        return true;
+    }
 
     public function Company()
     {
@@ -55,33 +68,38 @@ class User extends Authenticatable
         return false;
     }
     
+    public function publishedTrainings()
+    {
+        return $this->hasMany('App\Models\Training');
+    }
     public function Trainings()
     {
-        $this->belongsToMany('App\Models\Training', 'training_user');
+       return $this->belongsToMany('App\Models\Training', 'training_user');
     }
 
     public function courses()
     {
-        $this->belongsToMany('App\Models\Course', 'user_course');
+       return $this->belongsToMany('App\Models\Course', 'user_course');
+    }
+
+    public function publishedCourses()
+    {
+        return $this->hasMany('App\Models\Course');
     }
 
     public function AQcms()
     {
-        $this->belongsToMany('App\Models\Answer', 'user_answer');
+       return $this->belongsToMany('App\Models\Answer', 'user_answer');
     }
 
     public function Certificates()
     {
-        $this->belongsToMany('App\Models\Certificate', 'user_certificate');
+      return  $this->belongsToMany('App\Models\Certificate', 'user_certificate');
     }
     //mutator slug
 
-    public function setSlugAttribute($value)
+    public function categories()
     {
-        $users = User::where('slug','like',$value.'%')->get();
-        if($users->count()>0)
-            $this->attributes['slug'] =  $value."-".$users->count();
-        else
-            $this->attributes['slug'] = $value;
+        return $this->hasMany('App\Models\Category');
     }
 }
