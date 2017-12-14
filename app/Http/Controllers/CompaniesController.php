@@ -99,23 +99,27 @@ class CompaniesController extends Controller
     public function subscribe(Request $request)
     {
         
-  /*
-        $admins = \App\Models\Role::where('name', 'superadmin');
-        return $admins;
-*/
         $this->validate($request,
         [
             'training'=>'required|exists:trainings,slug'
         ]);
+
         $training = Training::slug($request->training);
         $company = Auth::user()->Company;
-
-        $training_company = $training->companies()->where('id',$company->id)->first();
-        if($training_company == null){
-            $training->Companies()->attach($company->id);
-        }
-
         
+        $training_company = $training->companies()->where('id',$company->id)->first();
+        if($training_company == null)
+        {
+            $training->Companies()->attach($company->id);
+            
+            $notificationBody = $company->name." Demande la formation ".$training->title;
+            $href = "/confirm/training/".$training->id."/company/".$company->id;
+            $icon = "fa fa-building";
+            //send notification to all superadmins
+            foreach(\App\Models\Role::superAdmins() as $superAdmin)
+                $superAdmin->notify(new \App\Notifications\NewSubscriber($superAdmin, $notificationBody,$href, $icon));
+        }        
+
         return redirect()->back();
     }
 }

@@ -8,3 +8,12 @@
 		array_push($arr, $filename);
 		return implode('/', $arr);
 	}
+
+	function getNotifications()
+	{
+			
+	}
+
+	function CountNotifications(){
+		return getNotifications()->count();
+	} 

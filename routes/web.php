@@ -23,6 +23,6 @@ Route::resource('courses', 'CoursesController');
 Route::get('courses/{course}/qcms', ['uses'=>'CoursesController@qcms', 'as'=>'courses.qcms']);
 Route::resource('categories', 'CategoriesController');
 Route::resource('qcms', 'QcmsController');
-
+Route::get("confirm/training/{training}/company/{company}/notification/{notification}","AdminsController@ConfirmTrainingCompany");
 
 Route::post('companies/subscribe', ['uses'=>"CompaniesController@subscribe", "as"=>"companies.subscribe"]);

@@ -38,8 +38,6 @@
       <div class="d-flex justify-content-center flex-column full-height ">
       
         <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-        
-
         <h3>Bonjour {{request()->user()->name}}</h3>
         <p>
           Dans cette page vous allez créer des nouveaux utilisateurs 
@@ -88,6 +86,33 @@
               </div>
             </div>
           </div>
+          @if(Auth::check() && Auth::user()->isSuperAdmin())
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group form-group-default">
+                <label for="role">Role</label>
+                <select name="role" id="role" class="form-control">
+                  <option value="-1">Utilisateur</option>
+                  @foreach(App\Models\Role::get() as $role)
+                  <option value="{{$role->id}}">{{$role->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row" id="company">
+            <div class="col-md-12">
+              <div class="form-group form-group-default">
+                <label for="company_id">Entreprise</label>
+                <select name="company_id" id="company_id" class="form-control">
+                  @foreach(App\Models\Company::get() as $company)
+                  <option value="{{$company->id}}">{{$company->name}}</option>
+                  @endforeach
+                </select>
+              </div>
+            </div>
+          </div>          
+          @endif
           <div class="row m-t-10">
             <div class="col-lg-6">
               <p><small>I agree to the <a href="#" class="text-info">Pages Terms</a> and <a href="#" class="text-info">Privacy</a>.</small></p>
@@ -124,6 +149,21 @@
     $(function()
     {
       $('#form-register').validate()
+      $('#role').change(function()
+      {
+        if($(this).find('option:selected').text() == "superadmin")
+          $("#company").css('display','none');
+        else
+          $("#company").css('display','block');
+
+      })
+
+      if($(this).find('option:selected').text() == "superadmin")
+        $("#company").css('display','none');
+      else
+        $("#company").css('display','block');
+
+      
     })
     </script>
   </body>

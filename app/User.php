@@ -77,6 +77,10 @@ class User extends Authenticatable
        return $this->belongsToMany('App\Models\Training', 'training_user');
     }
 
+    public function Notifications(){
+        return $this->belongsToMany('App\Models\Notification', 'user_notification')->where('is_viewed',false);
+    }
+
     public function courses()
     {
        return $this->belongsToMany('App\Models\Course', 'user_course');
@@ -102,4 +106,6 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Category');
     }
+
+    
 }

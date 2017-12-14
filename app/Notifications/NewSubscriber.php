@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use App\Models\Role;
+use App\Models\Notification as NotificationModel;
 
 class NewSubscriber extends Notification
 {
@@ -16,9 +18,10 @@ class NewSubscriber extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $body, $href='#', $icon=null)
     {
-        //
+        $notification = NotificationModel::create(['body'=>$body, 'href'=>$href, 'icon'=>$icon]);
+        $user->Notifications()->attach($notification->id);
     }
 
     /**

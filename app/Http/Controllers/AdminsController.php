@@ -83,4 +83,17 @@ class AdminsController extends Controller
     {
         //
     }
+
+    public function ConfirmTrainingCompany($training, $company, $notification)
+    {
+        \DB::table('training_company')->update(['is_confirmed'=>true]);
+        \DB::table('user_notification')
+        ->where([
+                    ['user_id','=', \Auth::user()->id],
+                    ['notification_id','=',$notification]
+                ])
+        ->update(['is_viewed'=>true]);
+        session()->flash('success', "La formation a été attaché correctement à l'entreprise");
+        return view('admins.confirmtrainingcompany');
+    }
 }

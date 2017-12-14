@@ -10,6 +10,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "merujan99/laravel-video-embed": "dev-master",
+        "symfony/polyfill-iconv": "^1.6",
         "unisharp/laravel-filemanager": "~1.8"
     },
     "require-dev": {

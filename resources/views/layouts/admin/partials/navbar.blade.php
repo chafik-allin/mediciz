@@ -22,7 +22,9 @@
           <li class="m-t-30">
             <a href="{{route('admins.index')}}" class="detailed ">
               <span class="title">Accueil</span>
-              <span class="details">234 notifications</span>
+              <span class="details">
+                {{ ($c = Auth::user()->notifications()->count()) == 1 ? "$c Notification": "$c Notifications" }}
+              </span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-home"></i></span>
           </li>
@@ -34,7 +36,9 @@
             <a href="{{route('companies.show', Auth::user()->company)}}" class="detailed">
             @endif
               <span class="title">Entreprises</span>
-              <span class="details">{{App\Models\Company::count()}} entreprises</span>
+              <span class="details">
+                {{($c = \App\Models\Company::count())== 1 ? "$c  Entreprise" : "$c Entreprises"}}
+            </span>
             </a>
             <span class="icon-thumbnail "><i class="fa fa-building"></i></span>
           </li>
