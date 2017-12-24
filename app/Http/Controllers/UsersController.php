@@ -10,12 +10,16 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:superadmin');
+        $this->middleware('role:superadmin', ['except'=>["index"]]);
+        $this->middleware('role:admin');
     }
 
     public function index()
     {
-        $users = User::All();
+        if(request()->user()->isSuperAdmin())
+            $users = User::All();
+        else
+            $users = User::where('company_id', request()->user()->company_id)->get();
         return view('users.index')->withUsers($users);
     }
 
@@ -49,7 +53,13 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::slug($id);
-        $user->delete();
-        return redirect()->back()->withSuccess('Utilisateur supprimé avec success');
+        //Vérifie si l'utilisateur est du même entreprise que l'admin avant de supprimer
+        if(Auth::user()->isSuperAdmin() || ($user->company_id == Auth::user()->company_id))
+        {
+            $user->delete();
+            return redirect()->back()->withSuccess('Utilisateur supprimé avec success');
+        }
+
+        return redirect()->back();
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Qcm;
 use App\Models\Qcm_answer;
 use Auth;
 use Route;
+use Merujan99\LaravelVideoEmbed\Facades\LaravelVideoEmbed;
 class CoursesController extends Controller
 {
     /**
@@ -71,7 +72,6 @@ class CoursesController extends Controller
     public function show($id)
     {
         $course = Course::slug($id);
-
         return view('courses.show')->withCourse($course);
     }
 
@@ -119,6 +119,8 @@ class CoursesController extends Controller
      */
     public function destroy($id)
     {
-        die("destroy $id");
+        $course = Course::slug($id);
+        $course->delete();
+        return redirect()->back()->withSuccess('Cours supprimé avec success');
     }
 }

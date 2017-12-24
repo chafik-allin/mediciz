@@ -79,7 +79,7 @@
             <div class="form-group form-group-default">
               <label>Email</label>
               <div class="controls">
-                <input type="email" name="email" placeholder="Email" class="form-control" required>
+                <input type="email" name="email"  value="{{old('email')}}" placeholder="Email" class="form-control" required>
               </div>
             </div>
             <!-- END Form Control-->

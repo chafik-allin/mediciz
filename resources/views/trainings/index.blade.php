@@ -142,6 +142,7 @@
                 Ici, vous pouvez voir toutes vos formations, chaque formation a ses spécifications, Descreption, tutor, et le temps, plus vous pouvez filtrer, rechercher, ajouter ou supprimer les formations listées 
               </p>
             </div>
+            @if(Auth::user()->isSuperAdmin())
             <div class="offset-md-4 col-md-4">
               <a href="{{route('trainings.create')}}">
                 <button class="btn btn-primary  text-center" type="button" style="width: 100%; height: 55px;">
@@ -149,11 +150,11 @@
                 </button>
               </a>            
             </div>
+            @endif
           </div>
         </div>
       </div>
       <div class="row">
-
         @forelse($trainings as $training)
         <div class="col-md-4 ">
         @component('components.training', ['training'=>$training]) @endcomponent
@@ -161,7 +162,7 @@
         @empty
         <div class="col-md-12">      
           <div class="alert alert-info text-center">
-            Aucune formation créé
+            Aucune formation
           </div>
         </div>
         @endforelse
@@ -173,3 +174,43 @@
 @endsection
 
 
+
+@section('scripts')
+  <script>
+    $('.attach-companies').click(function(e){
+      $(this).parent().append("<form method=\"POST\" action=\"{{route('trainings.attach')}}\" >"
+                                +'{{csrf_field()}}'
+                                +'<p class="help">Maintenez CTRL pour choisir plusieur</p>'
+                                +'<select class="form-control" name="companies[]" multiple>'
+                                @if(request()->user()->isSuperAdmin())
+                                  @foreach(DB::table('companies')->get() as $company)
+                                  +'<option value="{{$company->id}}">{{$company->name}}</option>'
+                                  @endforeach
+                                @endif
+                                +'</select>'
+                                +'<input type="hidden" name="training" value="'+$(this).attr('id')+'">'
+                                +'<button class="btn btn-primary btn-block">Ajouter</button>'
+                              +'</form>');
+      e.preventDefault();
+      $(this).hide();
+    })
+
+    $('.attach-users').click(function(e){
+      $(this).parent().append('<form method="POST" action="#">'
+                                +'{{csrf_field()}}'
+                                +'<p class="help">Maintenez CTRL pour choisir plusieur</p>'
+                                +'<select class="form-control" multiple >'
+                                @if(request()->user()->isAdmin())
+                                  @foreach(request()->user()->company->users as $user)
+                                    @continue(request()->user()->id == $user->id)
+                                    +'<option>{{$user->name}}</option>'
+                                  @endforeach
+                                @endif
+                                +'</select>'
+                                +'<button class="btn btn-primary btn-block">Ajouter</button>'
+                              +'</form>');
+      e.preventDefault();
+      $(this).hide();
+    })
+  </script>
+@endsection

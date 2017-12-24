@@ -48,7 +48,7 @@
                         <i class="fa fa-check-circle text-success fs-16 m-t-10"></i>
                       </div>
                       <div class="col-xs-height p-l-20">
-                        <h3 class="no-margin">@if($company->admin) {{$company->admin->name}} @else <div class="label label-danger">Indéfinie</div> @endif</h3>  
+                        <h3 class="no-margin">@if($company->admin) {{$company->admin->name}} @else <div class="label label-danger">Admin Indéfinie</div> @endif</h3>  
                         <p class="no-margin fs-16">{{$company->contact}}</p>
                         <p class="hint-text m-t-5 small">{{$company->phone}}</p>
                       </div>
@@ -107,7 +107,7 @@
                   <hr style="width: 50px;">
                   <div class="row">
 
-                    @forelse($company->trainings as $training)
+                    @forelse($company->getAllTrainings as $training)
                       <div class="col-md-4"> 
                         @component('components.training', ['training'=>$training]) @endcomponent
                       </div>
@@ -118,7 +118,7 @@
                         Aucune formation n'est associé à cette entreprise
                       </div>
                     </div>
-                    @endif
+                    @endforelse
                   {{--
                     <div class="col-lg-4  mix Programmation">
                       <div class="card card-default ">
@@ -268,14 +268,17 @@
                 <div class=" container-fluid   container-fixed-lg bg-white">
                   <div class="card card-transparent">
                     <div class="card-header ">
-                      <div class="card-title"> <h3>44 workers</h3></div>
+                      <div class="card-title"> <h3>{{$count = $company->users()->count()}} employés</h3></div>
+                      @if($count>0)
                       <div class="pull-right">
                         <div class="col-xs-12">
                           <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
                         </div>
                       </div>
+                      @endif
                       <div class="clearfix"></div>
                     </div>
+                    @if($count>0)
                     <div class="card-block">
                       <div id="tableWithSearch_wrapper" class="dataTables_wrapper no-footer">
                         <div>
@@ -300,51 +303,33 @@
                               </tr>
                             </thead>
                             <tbody>
+                              @foreach($company->users as $user)
                               <tr role="row" class="odd">
                                 <td class="v-align-middle semi-bold sorting_1">
-                                  <a href="mailto:joe@example.com?subject=feedback" email="" me"="">
-                                    <h4 href="#">Benabbes Ali</h4>
+                                  <a href="{{route('users.show', $user)}}" class="btn btn-primary ">
+                                    <h4 class="text-white">{{$user->name}}</h4>
                                   </a>
                                 </td>
                                 <td class="v-align-middle">
-                                  <h3 href="#">06</h3>
+                                  <h3 href="#">{{$user->trainings()->count()}}</h3>
                                 </td>
                                 <td class="v-align-middle">
-                                  <h3 href="#">44</h3>
+                                  <h3 href="#"><div class="label label-danger">à faire</div></h3>
                                 </td>
                                 <td class="v-align-middle">
-                                  <h3>00</h3>
+                                  <h3><div class="label label-danger">A faire</div></h3>
                                 </td>
                                 <td class="v-align-middle">
                                   <p>April 13,2014 10:13</p>
                                 </td>
                               </tr>
+                              @endforeach
                             </tbody>
                           </table>
                         </div>
-                        <div class="row">
-                          <div>
-                            <div class="dataTables_paginate paging_simple_numbers" id="tableWithSearch_paginate">
-                              <ul class="">
-                                <li class="paginate_button previous disabled" id="tableWithSearch_previous">
-                                  <a href="#" aria-controls="tableWithSearch" data-dt-idx="0" tabindex="0">
-                                    <i class="pg-arrow_left"></i>
-                                  </a>
-                                </li>
-                                <li class="paginate_button active">
-                                  <a href="#" aria-controls="tableWithSearch" data-dt-idx="1" tabindex="0">1</a>
-                                </li>
-                                <li class="paginate_button next disabled" id="tableWithSearch_next">
-                                  <a href="#" aria-controls="tableWithSearch" data-dt-idx="2" tabindex="0">
-                                    <i class="pg-arrow_right"></i>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
+                    @endif
                   </div>
                 </div>                            
               </div>

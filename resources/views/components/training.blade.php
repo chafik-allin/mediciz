@@ -75,19 +75,35 @@
 
   </div>
   @if(Auth::check() && Auth::user()->isAdmin())
+    @if(($status = request()->user()->company->getTrainingStatusById($training->id)) === NULL)
+       <div class="card-footer" style="padding: 0px">
+        <form action="{{route('companies.subscribe')}}" method="POST">
+          {{csrf_field()}}
+          <input type="hidden" name="training" value="{{$training->slug}}">
+          <button class="btn btn-complete btn-block " style="border-radius: 0">
+            Demander cette formation
+          </button>
+        </form>
+      </div>
+    @elseif($status === 0)
+      <div class="card-footer" style="padding: 0px;">
+        <div class="alert alert-warning text-center m-0">EN ATTENTE...</div>
+      </div>
+    @elseif($status===1)
+      <div class="card-footer" style="padding: 0px">
+        <div class="alert alert-success text-center m-0">Vous avez cette formation</div>
+      </div>
+    @endif
+  @endif
+  @if(Auth::check() && Auth::user()->isSuperAdmin())
   <div class="card-footer" style="padding: 0px">
-    <form action="{{route('companies.subscribe')}}" method="POST">
-      {{csrf_field()}}
-      <input type="hidden" name="training" value="{{$training->slug}}">
-      <button href="#" class="btn btn-success btn-block " style="border-radius: 0">
-        Demander cette formation
-      </button>
-    </form>
+    <button id="{{$training->id}}"  class="attach-companies btn btn-primary btn-block">Ajouter Entreprises</button>
   </div>
   @endif
+
 </div>
 @else
-  <div class="card card-default">
-      Training NOT FOUND!
-  </div>
+<div class="card card-default">
+    Training NOT FOUND!
+</div>
 @endif

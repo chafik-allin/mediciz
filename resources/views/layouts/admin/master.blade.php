@@ -22,16 +22,17 @@
     <link href="{{asset('assets/plugins/switchery/css/switchery.min.css')}}" rel="stylesheet" type="text/css" media="screen" />
 
     <link href="{{asset('pages/css/pages-icons.css')}}" rel="stylesheet" type="text/css">
-    @if(!Auth::check() || Auth::user()->isAdmin() || Auth::user()->isSuperAdmin())
+    @if(!Auth::check() || Auth::user()->isSuperAdmin())
       <link class="main-stylesheet" href="{{asset('pages/css/themes/corporate.css')}}" rel="stylesheet" type="text/css" />
     @elseif(Auth::check() && Auth::user()->isStudent())
       <link class="main-stylesheet" href="{{asset('pages/css/themes/light.css')}}" rel="stylesheet" type="text/css" />
+    @else
+      <link class="main-stylesheet" href="{{asset('pages/css/themes/simple.css')}}" rel="stylesheet" type="text/css" />
     @endif
 
   <link href="{{asset('assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('assets/plugins/datatables-responsive/css/datatables.responsive.css')}}" rel="stylesheet" type="text/css" media="screen" />
-    />
   
    
     @yield('styles')
@@ -217,7 +218,7 @@
     <!-- BEGIN VENDOR JS -->
         <!-- BEGIN VENDOR JS -->
     <script src="{{asset('assets/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/jquery/jquery-1.11.1.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('assets/plugins/jquery/jquery-3.2.1.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/modernizr.custom.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/jquery-ui/jquery-ui.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/tether/js/tether.min.js')}}" type="text/javascript"></script>

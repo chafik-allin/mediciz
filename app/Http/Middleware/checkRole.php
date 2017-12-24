@@ -10,7 +10,7 @@ class checkRole
     public function handle($request, Closure $next, $role)
     {
         //Vérifier s'il est connecter
-        if(! Auth::check() )
+        if(!Auth::check() )
             return redirect()->route('login')->withErrors("Vous devez être connecter pour pouvoir acceder à cette page");
 
         //Super Admin peut tout faire

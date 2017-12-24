@@ -34,6 +34,21 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        if(\App\User::count()==0)
+        {
+            $user = \App\User::create(
+            [
+                'slug'      =>  'chafik', 
+                'name'      =>  'chafik', 
+                'email'     =>  'chafik@is-allin.com', 
+                'password'  =>  bcrypt('chafik')
+            ]);
+            $role  = \App\Models\Role::create(['name'=>'superadmin']);
+            \App\Models\Role::create(['name'=>'admin']);
+            $user->roles()->attach($role->id);
+            echo ('Superadmin créé:<br>Email: chafik@is-allin.com<br>Mot de passe:chafik');
+            dd('');
+        }
         $this->middleware('guest')->except('logout');
     }
 }

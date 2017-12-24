@@ -28,13 +28,9 @@
             </a>
             <span class="icon-thumbnail "><i class="fa fa-home"></i></span>
           </li>
-          @if(Auth::user()->is('superadmin') or Auth::user()->is('admin'))
+          @if(Auth::user()->isSuperAdmin())
           <li class="">
-            @if(Auth::user()->is('superadmin'))
             <a href="{{route('companies.index')}}" class="detailed">
-            @elseif(Auth::user()->is('admin'))
-            <a href="{{route('companies.show', Auth::user()->company)}}" class="detailed">
-            @endif
               <span class="title">Entreprises</span>
               <span class="details">
                 {{($c = \App\Models\Company::count())== 1 ? "$c  Entreprise" : "$c Entreprises"}}
@@ -44,18 +40,23 @@
           </li>
           @endif
           <li class="">
-            <a href="{{route('trainings.index')}}" class="detailed">
+            <a href="javascript:;">
               <span class="title">Formations</span>
-              <span class="details">
-                @if(Auth::user()->isStudent())
-                  {{Auth::user()->trainings()->count()}}
-                @else
-                  {{App\Models\Training::count()}} 
-                @endif
-                formations
-              </span>
+              <span class="arrow"></span>
             </a>
-            <span class="icon-thumbnail "><i class="fa fa-graduation-cap"></i></span>
+            <span class="icon-thumbnail"><i class="fa fa-graduation-cap"></i></span>
+            <ul class="sub-menu">
+              @if(Auth::check() && !Auth::user()->isStudent())
+              <li>
+                <a href="{{route('trainings.index')}}">Toutes les formations</a>
+                <span class="icon-thumbnail"></span>
+              </li>
+              @endif
+              <li>
+                <a href="{{route('trainings.index', ['filter'=>'own'])}}">Voir Mes formations</a>
+                  <span class="icon-thumbnail"></span>
+              </li>
+            </ul>
           </li>
           @if(Auth::user()->isSuperAdmin())
           <li class="">
@@ -72,11 +73,16 @@
             </a>
             <span class="icon-thumbnail "><i class="fa fa-newspaper-o"></i></span>
           </li>
-
+        @endif
+        @if(Auth::check() && !auth::user()->isStudent())
           <li class="">
             <a href="{{route('users.index')}}" class="detailed">
               <span class="title">Utilisateurs</span>
+              @if(Auth::user()->isSuperAdmin())
               <span class="details">{{\App\User::count()}} utilisateurs</span>
+              @elseif(Auth::user()->isAdmin())
+              <span class="details">{{\App\User::where('company_id', Auth::user()->company_id)->count()}} utilisateurs</span>
+              @endif
             </a>
             <span class="icon-thumbnail "><i class="fa fa-users"></i></span>
           </li>

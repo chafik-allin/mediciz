@@ -19,11 +19,12 @@
 
   <div class="social " data-pages="social">
     <div class="jumbotron p-b-0" data-pages="parallax" data-social="cover">
-      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/PvgBwvHJUv8" frameborder="0" allowfullscreen=""></iframe>
+      {!! LaravelVideoEmbed::parse($course->video,['YouTube', 'Vimeo'],['autoplay' => 0],['width'=>'100%','height'=>'100%']) !!}
     </div>
   </div>
   <div class="container " style="position: relative;">
     <h2 class="bold text-success"> {{$course->title}}</h2>
+    <p>{{$course->description}}</p>
     <hr>
     <form action="frontFormation_submit" method="get" accept-charset="utf-8">
       @foreach($course->qcms as $qcm)
@@ -38,9 +39,8 @@
           </div>
           @endforeach
           @if(Auth::user()->isSuperadmin())
-            <a href="{{route('qcms.edit', $qcm)}}" class="btn ">
+            <a href="{{route('qcms.edit', $qcm)}}" class="btn btn-complete ">
               <i class="fa fa-edit"></i> 
-              Editer QCM
             </a>
             <form action="{{route('qcms.destroy',$qcm)}}" method="POST" class="d-inline-block">
               {{csrf_field()}}

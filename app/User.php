@@ -15,7 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = ['name', 'email','slug', 'password'];
+    protected $fillable = ['name', 'email','slug', 'password', 'company_id'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -26,7 +26,7 @@ class User extends Authenticatable
 
    public function roles()
     {
-        return $this->belongsToMany('App\Models\Role', 'user_role');
+        return $this->belongsToMany('App\Models\Role', 'user_role')->withTimestamps();
     }
 
 
@@ -74,7 +74,12 @@ class User extends Authenticatable
     }
     public function Trainings()
     {
-       return $this->belongsToMany('App\Models\Training', 'training_user');
+       return $this->belongsToMany('App\Models\Training', 'training_user')->withTimestamps();
+    }
+
+    public function getTrainingStatus($training)
+    {
+
     }
 
     public function Notifications(){
@@ -105,6 +110,11 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->hasMany('App\Models\Category');
+    }
+
+    public function hasTraining($id)
+    {
+        return $this->belongsToMany('App\Models\Training','training_user')->where('training_id', $id)->first();
     }
 
     

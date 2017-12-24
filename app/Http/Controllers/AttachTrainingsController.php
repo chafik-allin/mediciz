@@ -3,19 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Session;
 
-class AdminsController extends Controller
+class AttachTrainingsController extends Controller
 {
 
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->middleware('auth');
+        /***********
+            Middlewares:
+                Super admin: listes trainings & attach training to companies
+                admin: 
+                    listes trainings => attach training to own users
+
+        */////////////
     }
+
 
     public function index()
     {
-        return view("admins.index");
+        return view('trainings.attach.')
     }
 
     /**
@@ -25,7 +31,7 @@ class AdminsController extends Controller
      */
     public function create()
     {
-        //
+        dd('create');
     }
 
     /**

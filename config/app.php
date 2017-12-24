@@ -179,6 +179,8 @@ return [
 
         Merujan99\LaravelVideoEmbed\Providers\LaravelVideoEmbedServiceProvider::class,
 
+ Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+ Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -229,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'LaravelVideoEmbed' => Merujan99\LaravelVideoEmbed\Facades\LaravelVideoEmbed::class,
+         'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

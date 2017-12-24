@@ -19,8 +19,8 @@ class CompaniesController extends Controller
 
     public function __construct(Request $request)
     {
-        $this->middleware('owner:'.Route::current()->company, ['only'=>'show', 'edit', 'update']);
-        $this->middleware('role:superadmin', ['only'=>['index', 'create', 'store', 'destroy']]);
+        //$this->middleware('owner:'.Route::current()->company, ['only'=>'show', 'edit', 'update']);
+        $this->middleware('role:superadmin');
 
     }
 
@@ -94,32 +94,5 @@ class CompaniesController extends Controller
         $company = Company::slug($id);
         $company->delete();
         return redirect()->back()->withSuccess('Formation supprimée avec succes');
-    }
-
-    public function subscribe(Request $request)
-    {
-        
-        $this->validate($request,
-        [
-            'training'=>'required|exists:trainings,slug'
-        ]);
-
-        $training = Training::slug($request->training);
-        $company = Auth::user()->Company;
-        
-        $training_company = $training->companies()->where('id',$company->id)->first();
-        if($training_company == null)
-        {
-            $training->Companies()->attach($company->id);
-            
-            $notificationBody = $company->name." Demande la formation ".$training->title;
-            $href = "/confirm/training/".$training->id."/company/".$company->id;
-            $icon = "fa fa-building";
-            //send notification to all superadmins
-            foreach(\App\Models\Role::superAdmins() as $superAdmin)
-                $superAdmin->notify(new \App\Notifications\NewSubscriber($superAdmin, $notificationBody,$href, $icon));
-        }        
-
-        return redirect()->back();
     }
 }

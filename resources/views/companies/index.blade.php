@@ -63,7 +63,7 @@
                 <td class="v-align-middle">
                   <p>{{$company->founder}}</p>
                 </td>
-                <td class="v-align-middle">{{$company->Trainings()->count()}}</td>
+                <td class="v-align-middle">{{$company->getAllTrainings()->count()}}</td>
                 <td>
                   <a href="{{route('companies.edit',$company)}}" class="btn btn-lg btn-primary"><i class="fa fa-edit"></i></a>
                 </td>

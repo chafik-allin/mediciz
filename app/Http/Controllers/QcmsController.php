@@ -8,16 +8,18 @@ use App\Models\Qcm;
 use App\Http\Requests\QcmRequest;
 class QcmsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+
+
+    public function __construct()
     {
-        //
+        $this->middleware('role:suepradmin');
     }
 
+    public function index()
+    {
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -25,9 +27,9 @@ class QcmsController extends Controller
      */
     public function create()
     {
+
         $this->validate(request(),['course'=>'required']);
-        $course = Course::slug(request()->course);
-        return view('qcms.create')->withCourse($course);
+        return view('qcms.create')->withCourse(Course::slug(request()->course));
     }
 
     public function store(QcmRequest $request)

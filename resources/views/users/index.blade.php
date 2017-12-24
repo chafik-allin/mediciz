@@ -40,19 +40,23 @@
                 <th class="sorting" tabindex="0" aria-controls="tableWithSearch" rowspan="1" colspan="1" aria-label="role: activate to sort column ascending" style="width: 108px;">
                   Role
                 </th>
+                @if(Auth::user()->isSuperAdmin())
                 <th class="sorting" tabindex="0" aria-controls="tableWithSearch" rowspan="1" colspan="1" aria-label="entreprise: activate to sort column ascending" style="width: 108px;">
                   Entreprise
                 </th>
-
                 <th>Editer</th>
                 <th> Supprimer</th>
+                @endif
               </tr>
             </thead>
             <tbody>
               @foreach($users as $user)
               <tr>
                 <td class="v-align-middle semi-bold sorting_1 ">
+                  {{--
                   <h6><a href="{{route('users.show',$user)}}" class="btn btn-info" >{{$user->name}}</a></h6>
+                  --}}
+                  <h6>{{$user->name}}</h6>
                 </td> 
                 <td class="v-align-middle">
                   <p>{{$user->email}}</p>
@@ -64,12 +68,13 @@
 						<div class="label label-info">Etudiant</div>
                 	@endif
                 </td>
+                @if(Auth::user()->isSuperAdmin())
                 <td class="v-align-middle">
-                	@if($user->company)
-                	<a href="{{route('companies.show',$user->company->slug)}}">	{{$user->company->name}}</a>
-                	@else
-                		<p>NULL</p>
-                	@endif
+                  @if($user->company)
+                  <a href="{{route('companies.show',$user->company->slug)}}"> {{$user->company->name}}</a>
+                  @else
+                    <p>NULL</p>
+                  @endif
                 </td>
                 <td>
                   <a href="{{route('users.edit',$user)}}" class="btn btn-lg btn-primary"><i class="fa fa-edit"></i></a>
@@ -81,13 +86,13 @@
                     <button class="btn btn-danger btn-lg confirm"><i class="fa fa-trash"></i>  </button>
                   </form>
                 </td>
+                @endif
               </tr>
               @endforeach
             </tbody>
           </table>
         </div>
       </div>
-
     </div>
   </div>
   @else
